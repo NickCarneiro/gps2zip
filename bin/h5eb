@@ -107,7 +107,6 @@ function createApplicationAt(path) {
     cp('package.json', path + '/package.json');
     cp('Readme.md', path + '/Readme.md');
     cp('server.js', path + '/server.js');
-    cp('.gitignore', path + '/.gitignore');
   });
 }
 
