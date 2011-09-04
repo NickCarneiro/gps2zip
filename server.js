@@ -53,10 +53,13 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(require('stylus').middleware({ src: __dirname + '/public' }));
   app.use(express.favicon(__dirname + '/public/favicon.ico'));
+  app.use(app.router);
   if(fancyLog)
     app.use(express.logger(''
-      + '-------------------------------------------------------------------\\n'
-      + ':date'.bold
+      + '\\n'
+      + '  '
+      + ':date'.bold.underline
+      + '\\n'
       + '\\n'
         + '  IP: '.cyan.bold
           + ' '
@@ -74,7 +77,6 @@ app.configure(function(){
         + '  User Agent: '.magenta.bold
           + ':user-agent'.white
     ));
-  app.use(app.router);
 });
 
 
