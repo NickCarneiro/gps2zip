@@ -38,7 +38,8 @@ var express = require('express'),
 ============================================================================= */
 
 var port = 3000,
-    cacheAge = 60000 * 60 * 24 * 365;
+    cacheAge = 60000 * 60 * 24 * 365,
+    fancyLog = true;
 
 
 /*===========================================================================
@@ -52,7 +53,27 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(require('stylus').middleware({ src: __dirname + '/public' }));
   app.use(express.favicon(__dirname + '/public/favicon.ico'));
-  app.use(express.logger('":method :url" :status'));
+  if(fancyLog)
+    app.use(express.logger(''
+      + '-------------------------------------------------------------------\\n'
+      + ':date'.bold
+      + '\\n'
+        + '  IP: '.cyan.bold
+          + ' '
+          + ':remote-addr'.white
+      + '\\n'
+        + '  Method: '.red.bold
+          + ':method'.white
+      + '\\n'
+        + '  URL: '.blue.bold
+          + ':url'.white
+      + '\\n'
+        + '  Status: '.yellow.bold
+        + ':status'.white
+      + '\\n'
+        + '  User Agent: '.magenta.bold
+          + ':user-agent'.white
+    ));
   app.use(app.router);
 });
 
