@@ -231,37 +231,13 @@ app.get('*', function (req, res, next) {
   /*=========================================================================
     MIME TYPES
   =========================================================================== */
+
+  // Until pull request is in https://github.com/bentomas/node-mime
   mime.define({
-    // JavaScript
-    // Normalize to standard type (it's sniffed in IE anyways)
-    // tools.ietf.org/html/rfc4329#section-7.2
-    'application/javascript'         : ['js'],
-    // Audio
-    'audio/ogg'                      : ['oga', 'ogg'],
-    'audio/mp4'                      : ['m4a'],
-    // Video
-    'video/ogg'                      : ['ogv'],
-    'video/mp4'                      : ['mp4', 'm4v'],
-    'video/webm'                     : ['webm'],
-    // SVG
-    // Required for svg webfonts on iPad
-    // twitter.com/FontSquirrel/status/14855840545
-    'image/svg+xml'                  : ['svg', 'svgz'],
-    'gzip'                           : ['svgz'],
-    // Webfonts
-    'application/vnd.ms-fontobject'  : ['eot'],
-    'application/x-font-ttf'         : ['ttf', 'ttc'],
     'font/opentype'                  : ['otf'],
-    'application/x-font-woff'        : ['woff'],
-    // Assorted types
-    'image/x-icon'                   : ['ico'],
-    'image/webp'                     : ['webp'],
     'text/cache-manifest'            : ['appcache', 'manifest'],
     'text/x-component'               : ['htc'],
     'application/x-chrome-extension' : ['crx'],
-    'application/x-xpinstall'        : ['xpi'],
-    'application/octet-stream'       : ['safariextz'],
-    'text/x-vcard'                   : ['vcf']
   });
 
   // TODO: Allow concatenation from within specific js and css files
