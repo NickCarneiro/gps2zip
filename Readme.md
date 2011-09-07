@@ -14,6 +14,12 @@ Get started with a modern boilerplate for [Express](http://expressjs.com)!
       npm install -d
       node server.js
 
+# ... And for even quicker dev
+
+      npm install -g nodemon
+      cd project-name
+      nodemon
+
 # License
 
 Several components to H5EB have different licenses, (e.g. components from [H5BP](https://github.com/paulirish/html5-boilerplate)).

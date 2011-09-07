@@ -1,20 +1,7 @@
 /*===========================================================================
-
- .----------------.  .----------------.  .----------------.  .----------------.
-| .--------------. || .--------------. || .--------------. || .--------------. |
-| |  ____  ____  | || |   _______    | || |  _________   | || |   ______     | |
-| | |_   ||   _| | || |  |  _____|   | || | |_   ___  |  | || |  |_   _ \    | |
-| |   | |__| |   | || |  | |____     | || |   | |_  \_|  | || |    | |_) |   | |
-| |   |  __  |   | || |  '_.____''.  | || |   |  _|  _   | || |    |  __'.   | |
-| |  _| |  | |_  | || |  | \____) |  | || |  _| |___/ |  | || |   _| |__) |  | |
-| | |____||____| | || |   \______.'  | || | |_________|  | || |  |_______/   | |
-| |              | || |              | || |              | || |              | |
-| '--------------' || '--------------' || '--------------' || '--------------' |
- '----------------'  '----------------'  '----------------'  '----------------'
-
-                    http://bit.ly/html5-express-boilerplate
-
+  HTML5 Express Boilerplate ("H5EB")
 ============================================================================= */
+
 
 /*===========================================================================
   TODO: JSHINT GLOBAL VARS, CONFIG, AND INSTRUCTIONS
@@ -27,9 +14,12 @@
 
 var express = require('express'),
     inspect = require('inspect'),
+    stylus = require('stylus'),
+    nib = require('nib'),
     colors = require('colors'),
     sys = require('sys'),
     mime = require('mime'),
+    cleanCSS = require('clean-css'),
     app = module.exports = express.createServer();
 
 
@@ -39,7 +29,38 @@ var express = require('express'),
 
 var port = 3000,
     cacheAge = 60000 * 60 * 24 * 365,
-    fancyLog = true;
+    logs = {
+      set: false,
+      string: '\\n  ' + ':date'.bold.underline + '\\n\\n' + '  IP: '.cyan.bold
+        + ' ' + ':remote-addr'.white + '\\n' + '  Method: '.red.bold
+        + ':method'.white + '\\n' + '  URL: '.blue.bold + ':url'.white
+        + '\\n' + '  Status: '.yellow.bold + ':status'.white + '\\n'
+        + '  User Agent: '.magenta.bold + ':user-agent'.white
+    },
+    css =  {
+      count: 0,
+      debug: false,
+      set: true,
+      string: function() {
+        return '\n  + Stylus has detected changes and compiled new assets '
+          + this.count + ' times so far\n';
+      }
+    },
+    compiler = function(str, path) {
+        if (css.set) {
+          css.count++;
+          var cssString = css.string();
+          sys.puts(cssString.rainbow);
+        }
+        return stylus(str)
+          .set('filename', path)
+          .set('compress', false)
+          .set('warn', false)
+          .set('force', false)
+          .set('firebug', false)
+          .set('linenos', true)
+          .use(nib());
+    };
 
 
 /*===========================================================================
@@ -51,32 +72,9 @@ app.configure(function(){
   app.set('view engine', 'jade');
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(require('stylus').middleware({ src: __dirname + '/public' }));
   app.use(express.favicon(__dirname + '/public/favicon.ico'));
   app.use(app.router);
-  if(fancyLog)
-    app.use(express.logger(''
-      + '\\n'
-      + '  '
-      + ':date'.bold.underline
-      + '\\n'
-      + '\\n'
-        + '  IP: '.cyan.bold
-          + ' '
-          + ':remote-addr'.white
-      + '\\n'
-        + '  Method: '.red.bold
-          + ':method'.white
-      + '\\n'
-        + '  URL: '.blue.bold
-          + ':url'.white
-      + '\\n'
-        + '  Status: '.yellow.bold
-        + ':status'.white
-      + '\\n'
-        + '  User Agent: '.magenta.bold
-          + ':user-agent'.white
-    ));
+  if(logs.set) app.use(express.logger(logs.string));
 });
 
 
@@ -86,6 +84,12 @@ app.configure(function(){
 ============================================================================= */
 
 app.configure('development', function() {
+  app.use(stylus.middleware({
+    src: __dirname + '/views',
+    dest: __dirname + '/public',
+    debug: css.debug,
+    compile: compiler
+  }));
   app.use(express.static(__dirname + '/public'));
   app.use(express.errorHandler({
     dumpExceptions : true,
@@ -101,11 +105,27 @@ app.configure('development', function() {
 
 app.configure('production', function() {
   port = 8080;
-  app.use(express.static(__dirname + '/public', {
-    maxAge: cacheAge
-  }));
+  // TODO: Push this dirty hack to my Express fork and then submit pull request
+  var str = require('fs')
+        .readFileSync(__dirname + '/views/stylesheets/style.styl', 'utf8'),
+      paths = [__dirname + '/views/stylesheets', require('nib').path],
+      cssPath = __dirname + '/public/stylesheets',
+      fs = require('fs');
+  stylus(str)
+    .set('filename', cssPath)
+    .set('paths', paths)
+    .render(function(err, css) {
+      if(err) throw err;
+      css = cleanCSS.process(css);
+      fs.writeFile(__dirname + '/public/stylesheets/style.css', css, 'utf8', function(err){
+        if (err) return err;
+        console.log('\n  + Stylus compiled production-ready CSS using clean-css\n'.rainbow);
+      });
+    });
+  app.use(express.static(__dirname + '/public', { maxAge: cacheAge }));
   app.use(express.errorHandler());
 });
+
 
 /*===========================================================================
   ERROR HANDLING
@@ -121,7 +141,7 @@ app.use(function(req, res, next){
   res.render('404', {
     layout: false,
     status: 404,
-    // url: req.url,
+    //url: req.url,
     title: '404 Error'
   });
 });
@@ -159,15 +179,15 @@ app.use(function(err, req, res, next){
 app.get('/', function(req, res) {
   res.render('index', {
     title: 'HTML5 Express Boilerplate',
-    description: 'Default template for writing code quickly.'
+    description: 'Get started with a modern boilerplate for Express!'
   });
 });
 
-
 /*===========================================================================
-  REQUIRED ROUTES
+  TEST THE ERRORS
 ============================================================================= */
 
+/*
 // 404 Error
 app.get('/404', function(req, res, next){
   next();
@@ -184,9 +204,13 @@ app.get('/403', function(req, res, next){
 app.get('/500', function(req, res, next){
   next(new Error('keyboard cat!'));
 });
+*/
 
-// Always keep this route last
-app.get('*', function (req, res, next) {
+/*===========================================================================
+  WILDCARD MIDDLEWARE
+============================================================================= */
+
+function wildcard(req, res, next) {
 
   /*=========================================================================
     BETTER WEBSITE EXPERIENCE FOR IE USERS
@@ -201,11 +225,10 @@ app.get('*', function (req, res, next) {
   // We don't want to send this header on _everything_
   if(reqPath.match(/\.(js|css|gif|png|jpe?g|pdf|xml|oga|ogg|m4a|ogv|mp4|m4v|webm|svg|svgz|eot|ttf|otf|woff|ico|webp|appcache|manifest|htc|crx|xpi|safariextz|vcf)$/)) {
     // TODO: https://github.com/joyent/node/blob/master/lib/http.js
-    // removeHeader() should support multiple headers at once, comma separated?
+    // removeHeader() should support multiple headers as an array?
     res.removeHeader('X-UA-Compatible');
     res.removeHeader('IE=Edge,chrome=1');
   }
-
 
   /*=========================================================================
     CROSS DOMAIN AJAX REQUESTS
@@ -232,7 +255,8 @@ app.get('*', function (req, res, next) {
     MIME TYPES
   =========================================================================== */
 
-  // Until pull request is in https://github.com/bentomas/node-mime
+  // Until pull request is in
+  // https://github.com/bentomas/node-mime
   mime.define({
     'font/opentype'                  : ['otf'],
     'text/cache-manifest'            : ['appcache', 'manifest'],
@@ -248,9 +272,6 @@ app.get('*', function (req, res, next) {
 
   // TODO: Expires headers (for better cache control)
   // https://github.com/paulirish/html5-boilerplate/blob/master/.htaccess/#L186
-
-  // TODO: ETag removal
-  // https://github.com/paulirish/html5-boilerplate/blob/master/.htaccess/#L255
 
   // TODO: Stop screen flicker in IE on CSS rollovers
   // https://github.com/paulirish/html5-boilerplate/blob/master/.htaccess/#L271
@@ -274,7 +295,12 @@ app.get('*', function (req, res, next) {
   // https://github.com/paulirish/html5-boilerplate/blob/master/.htaccess/#L442
 
   next();
-});
+}
+
+/*===========================================================================
+  ALWAYS KEEP THIS ROUTE LAST
+============================================================================= */
+app.get('*', wildcard);
 
 /*===========================================================================
   START EXPRESS SERVER
