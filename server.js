@@ -105,7 +105,6 @@ app.configure('development', function() {
 
 app.configure('production', function() {
   port = 8080;
-  // TODO: Push this dirty hack to my Express fork and then submit pull request
   var str = require('fs')
         .readFileSync(__dirname + '/views/stylesheets/style.styl', 'utf8'),
       paths = [__dirname + '/views/stylesheets', require('nib').path],
@@ -116,6 +115,7 @@ app.configure('production', function() {
     .set('paths', paths)
     .render(function(err, css) {
       if(err) throw err;
+      // TODO: Push this dirty hack to an express fork and submit pull request
       css = cleanCSS.process(css);
       fs.writeFile(__dirname + '/public/stylesheets/style.css', css, 'utf8', function(err){
         if (err) return err;
@@ -178,13 +178,13 @@ app.use(function(err, req, res, next){
 // Index
 app.get('/', function(req, res) {
   res.render('index', {
-    title: 'HTML5 Express Boilerplate',
-    description: 'Get started with a modern boilerplate for Express!'
+    title: 'this is a title',
+    description: 'this is a description'
   });
 });
 
 /*===========================================================================
-  TEST THE ERRORS
+  ERROR TESTING
 ============================================================================= */
 
 /*
@@ -224,14 +224,12 @@ function wildcard(req, res, next) {
 
   // We don't want to send this header on _everything_
   if(reqPath.match(/\.(js|css|gif|png|jpe?g|pdf|xml|oga|ogg|m4a|ogv|mp4|m4v|webm|svg|svgz|eot|ttf|otf|woff|ico|webp|appcache|manifest|htc|crx|xpi|safariextz|vcf)$/)) {
-    // TODO: https://github.com/joyent/node/blob/master/lib/http.js
-    // removeHeader() should support multiple headers as an array?
     res.removeHeader('X-UA-Compatible');
     res.removeHeader('IE=Edge,chrome=1');
   }
 
   /*=========================================================================
-    CROSS DOMAIN AJAX REQUESTS
+    CORS
   =========================================================================== */
   // Force the latest IE version, in cases when it may fall back to IE7 mode
   // http://github.com/rails/rails/commit/123eb25#commitcomment-118920
@@ -239,17 +237,6 @@ function wildcard(req, res, next) {
   // Control cross domain using CORS http://enable-cors.org
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
-
-  /*=========================================================================
-    WEB FONT ACCESS
-  =========================================================================== */
-
-  // NOTE: This has already been taken care of with CORS above
-  // Allow access from all domains for webfonts.
-  // Alternatively you could only whitelist your
-  // subdomains like "subdomain.example.com".
-  //if(reqPath.match(/\.(ttf|ttc|otf|eot|woff|font.css)$/))
-  //  res.setHeader('Access-Control-Allow-Origin', '*');
 
   /*=========================================================================
     MIME TYPES
@@ -300,7 +287,7 @@ function wildcard(req, res, next) {
 /*===========================================================================
   ALWAYS KEEP THIS ROUTE LAST
 ============================================================================= */
-app.get('*', wildcard);
+app.use(wildcard);
 
 /*===========================================================================
   START EXPRESS SERVER
