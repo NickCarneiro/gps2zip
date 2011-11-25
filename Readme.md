@@ -1,7 +1,12 @@
 
-# HTML5 Express Boilerplate ("H5EB")
+# HTML5 Express EJS Boilerplate ("H5EEB")
 
 Get started with a modern boilerplate for [Express](http://expressjs.com)!
+
+Everyone has their own boilerplate. Why use this one?
+	* No jade or stylus. Use what you know, straight html and css
+	* No databases pre-installed. Choose what you want.
+	* Recent jQuery (1.7.1)
 
 ## Requirements
   * [node](https://github.com/joyent/node)
@@ -9,16 +14,11 @@ Get started with a modern boilerplate for [Express](http://expressjs.com)!
 
 # Quick Start
 
-      npm install -g h5eb
-      h5eb project-name && cd project-name
-      npm install -d
-      node server.js
+      Coming soon.
 
-# ... And for even quicker dev
+# Credits
 
-      npm install -g nodemon
-      cd project-name
-      nodemon
+      Forked from https://github.com/niftylettuce/express-icing
 
 # License
 
