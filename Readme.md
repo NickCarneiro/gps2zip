@@ -5,9 +5,9 @@ Get started with a modern boilerplate for [Express](http://expressjs.com)!
 
 Everyone has their own boilerplate. Why use this one?
 
-	* No jade or stylus. Use what you know, straight html and css
-	* No databases pre-installed. Choose what you want.
-	* Recent jQuery (1.7.1)
+* No jade or stylus. Use what you know, straight html and css
+* No databases pre-installed. Choose what you want.
+* Recent jQuery (1.7.1)
 
 ## Requirements
   * [node](https://github.com/joyent/node)
