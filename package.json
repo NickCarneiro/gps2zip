@@ -17,7 +17,7 @@
     , "clean-css": ">= 0.2.4"
   },
   "main": "server.js",
-  "keywords": ["h5eb", "html5", "express", "boilerplate", "jade", "stylus"],
+  "keywords": ["h5eb", "html5", "express", "boilerplate", "ejs"],
   "repository": "git://github.com/niftylettuce/html5-express-boilerplate",
   "bin": { "h5eb": "./bin/h5eb" },
   "scripts": { "prepublish" : "npm prune" },
