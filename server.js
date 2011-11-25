@@ -25,7 +25,7 @@ var express = require('express'),
   SETTINGS
 ============================================================================= */
 
-var port = 3003,
+var port = 4000,
     cacheAge = 60000 * 60 * 24 * 365,
     logs = {
       set: false,
@@ -131,7 +131,7 @@ app.use(function(err, req, res, next){
 app.get('/', function(req, res) {
   res.render('index', {
     modernizr: "javascripts/libs/modernizr-2.0.6.min.js",
-    jquery: "javascripts/libs/jquery-1.7.1.min.js,"
+    jquery: "javascripts/libs/jquery-1.7.1.min.js",
     title: 'this is a title',
     description: 'this is a description'
   });
