@@ -15,11 +15,11 @@ Everyone has their own boilerplate. Why use this one?
 
 # Quick Start
 
-      Coming soon.
+Coming soon.
 
 # Credits
 
-      Forked from https://github.com/niftylettuce/express-icing
+Forked from https://github.com/niftylettuce/express-icing
 
 # License
 
