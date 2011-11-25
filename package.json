@@ -1,16 +1,16 @@
 {
-  "name": "h5eb",
-  "description": "HTML5 Express Boilerplate",
+  "name": "Express EJS Boilerplate",
+  "description": "HTML5 Express EJS Boilerplate. None of that jade or stylus business. Straight CSS and EJS templating.",
   "version": "0.0.1",
-  "author": "Nick Baugh <niftylettuce@gmail.com>",
+  "author": "Nick Carneiro <nickc@trillworks.com>",
   "contributors": [
-    { "name": "Nick Baugh", "email": "niftylettuce@gmail.com" }
+    {"name": "Nick Baugh", "email": "niftylettuce@gmail.com" },
+    {"name": "Nick Carneiro", "email": "nickc@trillworks.com"}
   ],
   "dependencies": {
       "express": ">= 2.4.6"
-    , "stylus": ">= 0.0.1"
     , "nib": ">= 0.2.0"
-    , "jade": ">= 0.0.1"
+    , "ejs": ">= 0.5.0"
     , "inspect": ">= 0.0.2"
     , "colors": ">= 0.5.0"
     , "mime": ">= 1.2.2"
