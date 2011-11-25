@@ -14,10 +14,8 @@
 
 var express = require('express'),
     inspect = require('inspect'),
-    stylus = require('stylus'),
-    nib = require('nib'),
     colors = require('colors'),
-    sys = require('sys'),
+    sys = require('util'),
     mime = require('mime'),
     cleanCSS = require('clean-css'),
     app = module.exports = express.createServer();
@@ -36,30 +34,6 @@ var port = 3000,
         + ':method'.white + '\\n' + '  URL: '.blue.bold + ':url'.white
         + '\\n' + '  Status: '.yellow.bold + ':status'.white + '\\n'
         + '  User Agent: '.magenta.bold + ':user-agent'.white
-    },
-    css =  {
-      count: 0,
-      debug: false,
-      set: true,
-      string: function() {
-        return '\n  + Stylus has detected changes and compiled new assets '
-          + this.count + ' times so far\n';
-      }
-    },
-    compiler = function(str, path) {
-        if (css.set) {
-          css.count++;
-          var cssString = css.string();
-          sys.puts(cssString.rainbow);
-        }
-        return stylus(str)
-          .set('filename', path)
-          .set('compress', false)
-          .set('warn', false)
-          .set('force', false)
-          .set('firebug', false)
-          .set('linenos', true)
-          .use(nib());
     };
 
 
@@ -84,12 +58,7 @@ app.configure(function(){
 ============================================================================= */
 
 app.configure('development', function() {
-  app.use(stylus.middleware({
-    src: __dirname + '/views',
-    dest: __dirname + '/public',
-    debug: css.debug,
-    compile: compiler
-  }));
+  
   app.use(express.static(__dirname + '/public'));
   app.use(express.errorHandler({
     dumpExceptions : true,
@@ -105,23 +74,6 @@ app.configure('development', function() {
 
 app.configure('production', function() {
   port = 8080;
-  var str = require('fs')
-        .readFileSync(__dirname + '/views/stylesheets/style.styl', 'utf8'),
-      paths = [__dirname + '/views/stylesheets', require('nib').path],
-      cssPath = __dirname + '/public/stylesheets',
-      fs = require('fs');
-  stylus(str)
-    .set('filename', cssPath)
-    .set('paths', paths)
-    .render(function(err, css) {
-      if(err) throw err;
-      // TODO: Push this dirty hack to an express fork and submit pull request
-      css = cleanCSS.process(css);
-      fs.writeFile(__dirname + '/public/stylesheets/style.css', css, 'utf8', function(err){
-        if (err) return err;
-        console.log('\n  + Stylus compiled production-ready CSS using clean-css\n'.rainbow);
-      });
-    });
   app.use(express.static(__dirname + '/public', { maxAge: cacheAge }));
   app.use(express.errorHandler());
 });
