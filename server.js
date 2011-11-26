@@ -133,7 +133,9 @@ app.get('/', function(req, res) {
     modernizr: "javascripts/libs/modernizr-2.0.6.min.js",
     jquery: "javascripts/libs/jquery-1.7.1.min.js",
     title: 'this is a title',
-    description: 'this is a description'
+    description: 'this is a description',
+    javascripts: [],
+    stylesheets: []
   });
 });
 
