@@ -38,8 +38,8 @@ See /demo for an example using jQuery in the browser.
 
 # Quick Start
 
-	npm install gps2zip
-	npm install -d
+	npm install Gps2zip
+	cd node_modules/Gps2zip/
 	node server.js
 
 # Accuracy
