@@ -211,9 +211,15 @@ td { vertical-align: top; }
    Author: 
    ========================================================================== */
 
+#map_canvas {
+  width:600px;
+  height: 400px;
+}
 
-
-
+.topbox{
+  margin: 0px auto;
+  text-align: center;
+}
 
 
 

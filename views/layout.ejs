@@ -34,7 +34,7 @@
   <!-- All JavaScript at the bottom, except for Modernizr / Respond.
        Modernizr enables HTML5 elements & feature detects; Respond is a polyfill for min/max-width CSS3 Media Queries
        For optimal performance, use a custom Modernizr build: www.modernizr.com/download/ -->
-  <script src="/javascripts/libs/<%=modernizr %>"></script>
+  <script src="<%=modernizr %>"></script>
 </head>
 
 <body>
@@ -60,7 +60,7 @@
 
 
     <% for(var i=0; i<javascripts.length; i++) {%>
-    <script src="/javascripts/<%= javascripts[i] %>"></script>
+    <script src="<%= javascripts[i] %>"></script>
     <% } %> 
   <!-- scripts concatenated and minified via ant build script-->
   <!--<script defer src="js/plugins.js"></script>
