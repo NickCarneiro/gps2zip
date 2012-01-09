@@ -1,12 +1,8 @@
 {
-  "name": "Express-EJS-Boilerplate",
-  "description": "HTML5 Express EJS Boilerplate. None of that jade or stylus business. Straight CSS and EJS templating.",
+  "name": "Gps2zip",
+  "description": "Convert GPS latitude/longitude pairs to US zip codes.",
   "version": "0.0.1",
   "author": "Nick Carneiro <nickc@trillworks.com>",
-  "contributors": [
-    {"name": "Nick Baugh", "email": "niftylettuce@gmail.com" },
-    {"name": "Nick Carneiro", "email": "nickc@trillworks.com"}
-  ],
   "dependencies": {
       "express": ">= 2.4.6"
     , "ejs": ">= 0.5.0"
@@ -17,10 +13,8 @@
     , "clean-css": ">= 0.2.4"
   },
   "main": "server.js",
-  "keywords": ["h5eb", "html5", "express", "boilerplate", "ejs"],
-  "repository": "git://github.com/niftylettuce/html5-express-boilerplate",
-  "bin": { "h5eb": "./bin/h5eb" },
-  "scripts": { "prepublish" : "npm prune" },
+  "keywords": ["zip code", "zip", "geolocation", "location"],
+  "repository": "git://github.com/NickCarneiro/gps2zip",
   "engines": { "node": ">= 0.4.9 < 0.7.0" }
 }
 
