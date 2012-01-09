@@ -1,10 +1,12 @@
 
 # Gps2zip
+
 Convert GPS latitude longitude pairs to a US zip code.
 
 Runs as a server-side node API for your client-side js applications. 
 
 # Example usage
+
 Command line:
 	
 	burt$ curl "localhost:4000?lat=30.2859283&lon=-97.7461031"
@@ -37,10 +39,12 @@ See /demo for an example using jQuery in the browser.
 # Quick Start
 
 	npm install gps2zip
+	npm install -d
 	node server.js
 
 # Accuracy
-	The output is approximate. The source data is just a list of coordinates, not actual boundaries. The algorithm just finds the minimum euclidean distance between the point in question and the known points. No error checking for points outside the United States.
+The output is approximate. The source data is just a list of coordinates, not actual boundaries. The algorithm just finds the minimum euclidean distance between the point in question and the known points. No error checking for points outside the United States.
+
 # Related
 
 You can get full street addresses using the Google Maps Reverse Geocoding API:
