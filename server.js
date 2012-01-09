@@ -139,7 +139,7 @@ function initZips() {
 		zips = JSON.parse(data);
 	}
 	catch (err) {
-		console.error("There was an error opening the file:");
+		console.error("There was an error opening the zip code file:");
 		console.log(err);
 	}
 }
@@ -160,7 +160,6 @@ function gps2zip(lat, lon){
 	}
 	if(min_distance_index != -1){
 		zips[min_distance_index].distance = min_distance;
-		console.log(zips[min_distance_index]);
 		return zips[min_distance_index];
 	} else{
 		return {error: "Could not find a valid zip code."}
