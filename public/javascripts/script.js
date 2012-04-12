@@ -14,22 +14,22 @@ $(function(){
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
 	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-   	//initialize marker with no position
-    marker = new google.maps.Marker({
-      map:map
-  	});
+	//initialize marker with no position
+	marker = new google.maps.Marker({
+	  map:map
+	});
 
-    //fill window with map
-    $("#map_canvas").css("width", "100%");
-    var height = $(window).height();
-    $("#map_canvas").css("height", height);
+	//fill window with map
+	$("#map_canvas").css("width", "100%");
+	var height = $(window).height();
+	$("#map_canvas").css("height", height);
 
-    //bind listener for click
-    google.maps.event.addListener(map, 'click', function(e) {
-    	lookupPoint(e.latLng.Qa, e.latLng.Ra);
- 	});
+	//bind listener for click
+	google.maps.event.addListener(map, 'click', function(e) {
+		lookupPoint(e.latLng.lat(), e.latLng.lng());
+	});
 
- 	//get current position
+	//get current position
 	navigator.geolocation.getCurrentPosition( 
 
 		function (position) {  
@@ -57,7 +57,7 @@ function lookupPoint(lat, lon){
 	
 	//place marker on current location
 	marker.setPosition(latlon);
-  	
+	
 	$.get("/?lat=" + lat + "&lon=" + lon, function(res){
 		if(res.error != undefined){
 			$("#zip").html(res.error);
