@@ -1,17 +1,16 @@
 //load zip csv into memory into a format we can easily iterate over
 //executed when gps2zip is required
-var fs = require('fs');
-var zips = [];
-try {
-	var data = fs.readFileSync('zips.json', 'ascii');
+	
+	try {
+		var data = fs.readFileSync('zips.json', 'ascii');
 
-	//zips is a global defined up top
-	zips = JSON.parse(data);
-}
-catch (err) {
-	console.error("There was an error opening the zip code file:");
-	console.log(err);
-}
+		//zips is a global defined up top
+		zips = JSON.parse(data);
+	}
+	catch (err) {
+		console.error("There was an error opening the zip code file:");
+		console.log(err);
+	}
 
 exports.gps2zip = function(lat, lon){	
 
