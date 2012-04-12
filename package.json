@@ -1,7 +1,7 @@
 {
   "name": "Gps2zip",
   "description": "Convert GPS latitude/longitude pairs to US zip codes.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Nick Carneiro <nickc@trillworks.com>",
   "dependencies": {
       "express": ">= 2.4.6"
