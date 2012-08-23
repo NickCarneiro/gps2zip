@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/NickCarneiro/gps2zip.png)](http://travis-ci.org/NickCarneiro/gps2zip)
 	
 # Gps2zip
 
