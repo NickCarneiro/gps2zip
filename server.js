@@ -3,7 +3,7 @@
 var fs = require('fs');
 var zips = [];
 try {
-	var data = fs.readFileSync('zips.json', 'ascii');
+	var data = fs.readFileSync(__dirname + '/zips.json', 'ascii');
 
 	//zips is a global defined up top
 	zips = JSON.parse(data);
