@@ -4,17 +4,11 @@
   "version": "0.0.2",
   "author": "Nick Carneiro <nickc@trillworks.com>",
   "dependencies": {
-      "express": ">= 2.4.6"
-    , "ejs": ">= 0.5.0"
-    , "inspect": ">= 0.0.2"
-    , "colors": ">= 0.5.0"
-    , "mime": ">= 1.2.2"
-    , "commander": ">= 0.1.0"
-    , "clean-css": ">= 0.2.4"
+    "tape": ">= 3.0.3"
   },
   "main": "server.js",
   "keywords": ["zip code", "zip", "geolocation", "location"],
   "repository": "git://github.com/NickCarneiro/gps2zip",
-  "engines": { "node": ">= 0.4.9 < 0.7.0" }
+  "engines": { "node": ">= 0.4.9" }
 }
 
