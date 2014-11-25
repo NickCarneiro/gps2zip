@@ -17,5 +17,5 @@ for (var i=0; i < nn; i++){
 
 var hrEnd = process.hrtime(hrStart);
 
-// seeing 3.5 - 4.5 seconds on 2011 MBP
+// seeing 3.5 - 4.5 seconds on 2011 MBP before using kd-tree. Now 5-10ms.
 console.info("Execution time (hr): %ds %dms", hrEnd[0], hrEnd[1]/1000000);
