@@ -5,7 +5,7 @@
   "author": "Nick Carneiro <nickc@trillworks.com>",
   "dependencies": {
     "tape": ">= 3.0.3",
-    "kdtree": "0.0.10"
+    "kdt": "0.1.0"
   },
   "main": "index.js",
   "keywords": ["zip code", "zip", "geolocation", "location"],
