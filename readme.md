@@ -30,7 +30,7 @@ http://code.google.com/apis/maps/documentation/javascript/geocoding.html#Reverse
 
 # Credit
 
-Zip codes from The Zip Code Database Project
-http://sourceforge.net/projects/zips/
+Zip codes from US Census Bureau (Census.gov › Geography › Maps & Data › Gazetteer Files › 2017 U.S. Gazetteer Files)
+http://www.census.gov/geo/maps-data/data/gazetteer2017.html
 
 
