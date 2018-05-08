@@ -1,6 +1,6 @@
 {
   "name": "gps2zip",
-  "description": "Convert GPS latitude/longitude pairs to US zip codes.",
+  "description": "Convert GPS latitude/longitude pairs to US ZIP codes.",
   "version": "2.2.0",
   "author": "Nick Carneiro <nickc@trillworks.com>",
   "dependencies": {
@@ -8,9 +8,17 @@
     "kdt": "0.1.0"
   },
   "main": "index.js",
-  "keywords": ["zip code", "zip", "geolocation", "location"],
+  "keywords": [
+    "zip code",
+    "zip",
+    "geolocation",
+    "location"
+  ],
   "repository": "git://github.com/NickCarneiro/gps2zip",
-  "engines": { "node": ">= 0.4.9" },
-  "scripts": {"test": "node test/basic.js"}
+  "engines": {
+    "node": ">= 0.4.9"
+  },
+  "scripts": {
+    "test": "node test/basic.js"
+  }
 }
-
