@@ -19,7 +19,7 @@ test('spot check results for a handful of zip codes', function(t) {
     t.equal(seattle['zip_code'], 98101);
 
     var marfa = g.gps2zip(30.3119, -104.0247);
-    t.equal(marfa['zip_code'], 79843);
+    t.equal(marfa['zip_code'], 79734);
 
     var roundRock = g.gps2zip(30.5086, -97.6789);
     t.equal(roundRock['zip_code'], 78664);
