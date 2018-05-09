@@ -1,3 +1,4 @@
+#  [![NPM version][npm-image]][npm-url][![Build Status](https://travis-ci.org/NickCarneiro/gps2zip.svg)](https://travis-ci.org/NickCarneiro/gps2zip)
 
 # Gps2zip
 
@@ -32,5 +33,3 @@ http://code.google.com/apis/maps/documentation/javascript/geocoding.html#Reverse
 
 Zip codes from US Census Bureau (Census.gov › Geography › Maps & Data › Gazetteer Files › 2017 U.S. Gazetteer Files)
 http://www.census.gov/geo/maps-data/data/gazetteer2017.html
-
-
