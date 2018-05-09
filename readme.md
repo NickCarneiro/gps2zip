@@ -1,4 +1,4 @@
-#  [![NPM version][npm-image]][npm-url][![Build Status](https://travis-ci.org/NickCarneiro/gps2zip.svg)](https://travis-ci.org/NickCarneiro/gps2zip)
+# [![Build Status](https://travis-ci.org/NickCarneiro/gps2zip.svg?branch=master)](https://travis-ci.org/NickCarneiro/gps2zip)
 
 # Gps2zip
 
